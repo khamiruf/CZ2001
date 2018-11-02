@@ -70,61 +70,73 @@ public class Main {
 			} while (numOfEdge<(numOfCity-1) || numOfEdge>(numOfCity)*((numOfCity-1/2)-1));
 
 			Random random = new Random();
-
-			//create minimumEdges for BST
-			for (int i=0;i<numOfCity;i++)
-			{
-				if (i>0)
-				{
-					adjacentCity[i].add(i-1);
-					adjacentCity[i-1].add(i);
-				}
-			}
-
-			for (int i=0;i<numOfEdge-(numOfCity-1);i++)
-			{
-				int v1=random.nextInt(numOfCity);
-				int v2=random.nextInt(numOfCity);
-
-				//if the cities are the same, or both cities are already connected, just continue
-				if (Math.abs((v1-v2))<=1|| adjacentCity[v1].contains(v2))
-					i--;
-
-				//otherwise, add it into the graph
-				else
-				{
-					adjacentCity[v1].add(v2);
-					adjacentCity[v2].add(v1);
-				}
-			}
-			
-			//print out the graph (in a hash map way)
- 			System.out.println("The following is how the graph is connected: ");
-			for (int i=0;i<numOfCity;i++)
-			{
-				System.out.println(i + ": " + cityName[i]);
-				System.out.println(i+"->"+ adjacentCity[i]);
-			}
-
-			int source=-1,destination=-1;
-			do {
-				System.out.println("Enter source ID:"); 
-				source = sc.nextInt();
-				System.out.println("Enter destination ID :");
-				destination = sc.nextInt();
-			} while (source<0 ||source>=numOfCity || destination<0 || destination>=numOfCity );
-
 			List<Integer> wayToGo = new ArrayList<>();
 			Stack<Integer> way = new Stack<Integer>();
 			
 			long average = 0;
 			long start=0;
 			long end=0;
-			for(int i=0; i<440; i++) {
+			
+			int source=-1,destination=-1;
+			do {
+				System.out.println("Enter source ID:"); 
+				source = sc.nextInt();
+				System.out.println("Enter destination ID :");
+				destination = sc.nextInt();
+			} while (source<0 ||source>=numOfCity || destination<0 || destination>=numOfCity);
+			
+			for(int j=0; j<440; j++) {
+				for(int i=0; i<numOfCity; i++) {
+					adjacentCity[i].clear();
+				}
+				//create minimumEdges for BST
+				for (int i=0;i<numOfCity;i++)
+				{
+					if (i>0)
+					{
+						adjacentCity[i].add(i-1);
+						adjacentCity[i-1].add(i);
+					}
+				}
+	
+				for (int i=0;i<numOfEdge-(numOfCity-1);i++)
+				{
+					int v1=random.nextInt(numOfCity);
+					int v2=random.nextInt(numOfCity);
+	
+					//if the cities are the same, or both cities are already connected, just continue
+					if (Math.abs((v1-v2))<=1|| adjacentCity[v1].contains(v2))
+						i--;
+	
+					//otherwise, add it into the graph
+					else
+					{
+						adjacentCity[v1].add(v2);
+						adjacentCity[v2].add(v1);
+					}
+				}
+				
+				//print out the graph (in a hash map way)
+	 			/*System.out.println("The following is how the graph is connected: ");
+				for (int i=0;i<numOfCity;i++)
+				{
+					System.out.println(i + ": " + cityName[i]);
+					System.out.println(i+"->"+ adjacentCity[i]);
+				}*/
+	
+				/*int source=-1,destination=-1;
+				do {
+					System.out.println("Enter source ID:"); 
+					source = sc.nextInt();
+					System.out.println("Enter destination ID :");
+					destination = sc.nextInt();
+				} while (source<0 ||source>=numOfCity || destination<0 || destination>=numOfCity);*/
+
 				start=System.nanoTime();
 				way = BFS(source,destination,adjacentCity,numOfCity);
 				end=System.nanoTime();
 				average += end-start;
+				System.out.println(end-start);
 			}
 			average /= 440.0;
 			System.out.println("The following is the shortest path:");

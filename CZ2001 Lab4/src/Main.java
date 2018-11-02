@@ -97,7 +97,6 @@ public class Main {
 				System.out.println("["+i+"]\t"+cityName[i]);
 				System.out.println(i+"\t"+adjacentCity.get(i));
 			}
-			
 
 			int source=-1,destination=-1;
 			do {

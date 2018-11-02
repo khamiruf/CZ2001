@@ -59,7 +59,7 @@ public class Main {
 				LinkedList<Integer> adjacent = new LinkedList<Integer>();
 				adjacentCity[i]=adjacent;
 			}
-			String[]cityName=CityNameGenerator.generateCityNames("src/cities_1000.txt",numOfCity);
+			String[]cityName=CityNameGenerator.generateCityNames("src/ALOTOFCITIES.txt",numOfCity);
 			
 			int numOfEdge;
 			do {

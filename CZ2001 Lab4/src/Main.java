@@ -97,7 +97,7 @@ public class Main {
 				System.out.println("["+i+"]\t"+cityName[i]);
 				System.out.println(i+"\t"+adjacentCity.get(i));
 			}
-			System.out.println("Enter source and destination ID separated by space:");
+			System.out.println("Enter source and destination ID:");
 
 			int source=-1,destination=-1;
 			do {

@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class Main {
 
 	public static void BFS(int source, int destination, List<LinkedList<Integer>> adjacentCity, Stack<Integer> way,int numOfCity)
@@ -129,10 +130,16 @@ public class Main {
 			System.out.println("The following is the shortest path:");
 			
 			do {
-				int curr = way.pop();
+				int curr;
 				
-				
-				System.out.print(curr + ": " + cityName[curr] + " ");
+				if(way.peek() != destination) {
+					curr = way.pop();
+					System.out.print(curr + ": " + cityName[curr] + " -> ");
+				}
+				else {
+					curr = way.pop();
+					System.out.print(curr + ": " + cityName[curr]);
+				}				
 				
 			} while (!way.isEmpty());
 			

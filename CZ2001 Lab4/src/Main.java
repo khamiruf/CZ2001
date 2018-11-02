@@ -1,10 +1,11 @@
 import java.util.*;
 public class Main {
 
-	public static void BFS(int source, int destination, LinkedList<Integer>[] adjacentCity, Stack<Integer> way,int numOfCity)
+	public static Stack<Integer> BFS(int source, int destination, LinkedList<Integer>[] adjacentCity, int numOfCity)
 	{
 		List<Boolean> visited = new ArrayList<>();
 		List<Integer> prev = new ArrayList<>();
+		Stack<Integer> way = new Stack<Integer>();
 		
 		for (int i=0;i<numOfCity;i++)
 		{	
@@ -42,6 +43,8 @@ public class Main {
 			prevLoc=prev.get(prevLoc);
 		}
 		way.push(source);
+		
+		return way;
 	}
 	public static void main(String[] args) {
 		
@@ -119,7 +122,7 @@ public class Main {
 			long end=0;
 			for(int i=0; i<440; i++) {
 				start=System.nanoTime();
-				BFS(source,destination,adjacentCity,way,numOfCity);
+				way = BFS(source,destination,adjacentCity,numOfCity);
 				end=System.nanoTime();
 				average += end-start;
 			}
@@ -135,7 +138,6 @@ public class Main {
  				else {
  					curr = way.pop();
  					System.out.print(curr + ": " + cityName[curr]);
- 					break;
  				}	
  				
  			} while (!way.isEmpty());

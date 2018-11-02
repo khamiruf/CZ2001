@@ -56,13 +56,13 @@ public class Main {
 				adjacentCity.add(adjacent);
 			}
 			String[]cityName=CityNameGenerator.generateCityNames("src/cities_1000.txt",numOfCity);
-			//System.out.println("Enter the probability of having neighbors:");
-			//double probability=sc.nextDouble();
+			
+			//conditions for the min and max number of edges, based on the number of nodes(numOfCity)
 			System.out.println("Enter the number of edge("+(numOfCity-1)+"-"+(((numOfCity*(numOfCity-1)/2))-1)+")\t:");
 			int numOfEdge;
 			do {
 				numOfEdge=sc.nextInt();
-			}while (numOfEdge<(numOfCity-1) || numOfEdge>(numOfCity)*((numOfCity-1/2)-1));
+			} while (numOfEdge<(numOfCity-1) || numOfEdge>(numOfCity)*((numOfCity-1/2)-1));
 
 			Random random = new Random();
 
@@ -97,13 +97,14 @@ public class Main {
 				System.out.println("["+i+"]\t"+cityName[i]);
 				System.out.println(i+"\t"+adjacentCity.get(i));
 			}
-			System.out.println("Enter source and destination ID:");
 
 			int source=-1,destination=-1;
 			do {
+				System.out.println("Enter source ID:"); 
 				source = sc.nextInt();
+				System.out.println("Enter destination ID :");
 				destination = sc.nextInt();
-			}while (source<0 ||source>=numOfCity || destination<0 || destination>=numOfCity );
+			} while (source<0 ||source>=numOfCity || destination<0 || destination>=numOfCity );
 
 			List<Integer> wayToGo = new ArrayList<>();
 			Stack<Integer> way = new Stack<Integer>();

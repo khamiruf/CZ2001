@@ -43,6 +43,8 @@ public class Main {
 		}
 		way.push(source);
 	}
+	
+	
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
@@ -128,6 +130,8 @@ public class Main {
 			
 			do {
 				int curr = way.pop();
+				
+				
 				System.out.print(curr + ": " + cityName[curr] + " ");
 				
 			} while (!way.isEmpty());

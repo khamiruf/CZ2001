@@ -12,5 +12,5 @@ Includes:
 2. text file
 
 
-*note: if using eclipse, change the text output encoding to get a prettier printout :-) 
+*note: if using eclipse, change the text output encoding to get a prettier printout :-)*
 *file -> properties -> text file encoding: UTF-8*

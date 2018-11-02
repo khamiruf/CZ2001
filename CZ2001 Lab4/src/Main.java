@@ -34,6 +34,7 @@ public class Main {
 			}
 			
 		}
+		
 		int prevLoc=destination;
 		while (prevLoc!=source)
 		{
@@ -43,25 +44,30 @@ public class Main {
 		way.push(source);
 	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Scanner sc=new Scanner(System.in);
+		
+		Scanner sc = new Scanner(System.in);
 		while (true)
 		{
 			System.out.println("Enter the number of city:");
 			int numOfCity = sc.nextInt();
+			
 			List<LinkedList<Integer>> adjacentCity= new ArrayList<LinkedList<Integer>>();
+			
 			for (int i=0;i<numOfCity;i++)
 			{
-				LinkedList<Integer> adjacent= new LinkedList<Integer>();
+				LinkedList<Integer> adjacent = new LinkedList<Integer>();
 				adjacentCity.add(adjacent);
 			}
+			
 			String[]cityName=CityNameGenerator.generateCityNames("src/cities_1000.txt",numOfCity);
 			
 			//conditions for the min and max number of edges, based on the number of nodes(numOfCity)
-			System.out.println("Enter the number of edge("+(numOfCity-1)+"-"+(((numOfCity*(numOfCity-1)/2))-1)+")\t:");
+			//max: where there is at least 1 pair of cities with no non-stop flight, but a route between them
+			System.out.println("Enter the number of edge("+(numOfCity-1)+"-"+(((numOfCity*(numOfCity-1)/2))-1)+")\t:"); //\t: title, to center the text 
+			
 			int numOfEdge;
 			do {
-				numOfEdge=sc.nextInt();
+				numOfEdge = sc.nextInt();
 			} while (numOfEdge<(numOfCity-1) || numOfEdge>(numOfCity)*((numOfCity-1/2)-1));
 
 			Random random = new Random();
@@ -75,13 +81,15 @@ public class Main {
 					adjacentCity.get(i-1).add(i);
 				}
 			}
-
+			
+			
+			//connecting the cities
 			for (int i=0;i<numOfEdge-(numOfCity-1);i++)
 			{
 				int v1=random.nextInt(numOfCity);
 				int v2=random.nextInt(numOfCity);
 
-				//if the vertices index are the same, or only differs by 1, or has already had edges between them, continue looping
+				//if the cities are the same, or both cities are already connected, just continue
 				if (Math.abs((v1-v2))<=1|| adjacentCity.get(v1).contains(v2))
 					i--;
 
@@ -92,10 +100,13 @@ public class Main {
 					adjacentCity.get(v2).add(v1);
 				}
 			}
+			
+			//print out the graph (in a hash map way)
+			System.out.println("The following is how the graph is connected: ");
 			for (int i=0;i<numOfCity;i++)
 			{
-				System.out.println("["+i+"]\t"+cityName[i]);
-				System.out.println(i+"\t"+adjacentCity.get(i));
+				System.out.println(i + ": "+ cityName[i]);
+				System.out.println(i+"->"+ adjacentCity.get(i));
 			}
 
 			int source=-1,destination=-1;
@@ -113,15 +124,19 @@ public class Main {
 			BFS(source,destination,adjacentCity,way,numOfCity);
 			long end=System.nanoTime();
 			
-			while (!way.isEmpty())
-			{
-				int curr=way.pop();
-				System.out.println(curr+" "+cityName[curr]);
-			}
-			System.out.println("Time taken\t:"+ (end-start));
+			System.out.println("The following is the shortest path:");
+			
+			do {
+				int curr = way.pop();
+				System.out.print(curr + ": " + cityName[curr] + " ");
+				
+			} while (!way.isEmpty());
+			
+			System.out.println();
+			System.out.println("Time taken: "+ (end-start));
 		
-			System.out.println("Do you want to continue?Y/N");
-			String input=sc.next();
+			System.out.println("Do you want to continue? Y/N");
+			String input = sc.next();
 			if (input.equals("N"))
 				break;
 		}

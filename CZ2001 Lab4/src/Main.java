@@ -155,11 +155,11 @@ public class Main {
  			} while (!way.isEmpty());
  			
  			System.out.println();
-			System.out.println("Time taken\t:"+ average);
+			System.out.println("Time taken: "+ average);
 		
 			System.out.println("Do you want to continue? Y/N");
  			String input = sc.next();
-			if (input.equals("N"))
+			if (input.equals("N") || input.equals("n"))
 				break;
 		}
 	}
